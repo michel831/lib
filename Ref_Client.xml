@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="refPropertiesHolder" class="com.bnppa.referentiels.services.carat.utils.PropertiesUtil">
+		<property name="location">
+			<value>classpath:Referentiels.properties</value>
+		</property>
+	</bean>
+
+<!-- 	<bean id="RemoteHttpInvoker" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean"> -->
+<!-- 		<property name="serviceUrl" value="http://${http.server.host}:${http.server.port}/${http.server.contextwebapp}/remote/ReferentielServiceHttpBean" /> -->
+<!-- 		<property name="serviceInterface" value="com.bnppa.cinrj.services.consumer.invoker.CINRJRemoteServiceHTTPInvoker" /> -->
+<!-- 	</bean> -->
+
+
+	<bean id="titrearchiveservices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="titreRecentServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="titreServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+
+	<bean id="portfolioServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="portfolioAccountServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** PARTY SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="alternatePartyIdentificationServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="partyServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** PlaceOfListingDescription ************************************** -->
+	<!-- ********************************************************* -->
+
+	<bean id="placeOfListingDescriptionServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** CIRCUIT CENTRALISATION SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="circuitCentralisationServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** TITRES SERVICES (2) ************************************ -->
+	<!-- ********************************************************* -->
+	<bean id="regleConservationTitreRecentServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** COURS SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="valeurLiquidativeServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="valeurLiquidativeHistoriqueServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="tauxChangeDernierConnuServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="coursDernierConnuServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** OST SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="corporateActionServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** CURRENCY SERVICES ***************************************** -->
+	<!-- ************************************************************** -->
+	<bean id="currencyServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CurrenciesConsumer">
+	</bean>
+
+	<bean id="currencyRESTServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CurrenciesConsumer">
+	</bean>
+
+	<bean id="currencyServicesWithCacheSupport"
+			class="com.bnppa.referentiels.services.carat.consumers.CurrenciesConsumer">
+	</bean>
+	<bean id="TitresServicesWithCacheSupport"
+			class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** BAREME SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="baremeServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<!-- ** COURS SERVICES (2) *********************************** -->
+	<!-- ********************************************************* -->
+	<bean id="tauxChangeHistoriqueServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="coursHistoriqueServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="instrumentDetailServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+	<bean id="alternatePortfolioIdentificationServices"
+		class="com.bnppa.referentiels.services.carat.consumers.CaratConsumer">
+	</bean>
+
+
+	<!-- Define the ClientServicesImpl -->
+	<!-- <bean 	id="metierServices" class="com.bnppa.referentiels.services.impl.MetierServicesImpl">
+		<property name="titreServices">
+			<ref bean="titreServices" />
+		</property>
+		<property name="portfolioServices">
+			<ref bean="portfolioServices" />
+		</property>
+		<property name="portfolioAccountServices">
+			<ref bean="portfolioAccountServices" />
+		</property>
+		<property name="titreRecentServices">
+			<ref bean="titreRecentServices" />
+		</property>
+		<property name="alternatePartyIdentificationServices">
+			<ref bean="alternatePartyIdentificationServices" />
+		</property>
+		<property name="circuitCentralisationServices">
+			<ref bean="circuitCentralisationServices" />
+		</property>
+		<property name="regleConservationTitreRecentServices">
+			<ref bean="regleConservationTitreRecentServices" />
+		</property>
+		<property name="valeurLiquidativeServices">
+			<ref bean="valeurLiquidativeServices" />
+		</property>
+		<property name="valeurLiquidativeHistoriqueServices">
+			<ref bean="valeurLiquidativeHistoriqueServices" />
+		</property>
+		<property name="tauxChangeDernierConnuServices">
+			<ref bean="tauxChangeDernierConnuServices" />
+		</property>
+		<property name="coursDernierConnuServices">
+			<ref bean="coursDernierConnuServices" />
+		</property>
+		<property name="corporateActionServices">
+			<ref bean="corporateActionServices" />
+		</property>
+		<property name="currencyServices">
+			<ref bean="currencyServices" />
+		</property>
+		<property name="partyServices">
+			<ref bean="partyServices" />
+		</property>
+		<property name="tauxChangeHistoriqueServices">
+			<ref bean="tauxChangeHistoriqueServices" />
+		</property>
+		<property name="coursHistoriqueServices">
+			<ref bean="coursHistoriqueServices" />
+		</property>
+		<property name="instrumentDetailServices">
+			<ref bean="instrumentDetailServices" />
+		</property>
+		<property name="alternatePortfolioIdentificationServices">
+			<ref bean="alternatePortfolioIdentificationServices" />
+		</property>
+
+	</bean>	-->
+
+	<!-- SERVICAL CALL LOGGING FEATURES (non activé)
+	<bean id="ServiceLogAdvice" class="com.bnppa.referentiels.services.aop.ServiceLogAdvice"></bean>
+
+	<bean id="LogAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="ServiceLogAdvice" />
+		</property>
+		<property name="pattern">
+			<value>.*referentiels.services.*</value>
+		</property>
+	</bean>
+
+	<bean id="PerformanceTestInterceptor" 	class="com.bnppa.referentiels.services.aop.PerformanceTestInterceptor">	</bean>
+
+	<bean id="PerformanceTestAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="PerformanceTestInterceptor" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>.*referentiels.services.*</value>
+				<value>.*builder.*</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" /> -->
+
+</beans>
