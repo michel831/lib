@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="refPropertiesHolder" class="com.bnppa.referentiels.services.locator.PropertiesUtil">
+		<property name="location">
+			<value>classpath:Referentiels.properties</value>
+		</property>
+	</bean>
+
+	<bean id="RemoteHttpInvoker" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean">
+		<property name="serviceUrl" value="http://${http.server.host}:${http.server.port}/${http.server.contextwebapp}/remote/ReferentielServiceHttpBean" />	
+		<property name="serviceInterface" value="com.bnppa.cinrj.services.consumer.invoker.CINRJRemoteServiceHTTPInvoker" />
+	</bean>
+	
+	
+	<bean id="titrearchiveservices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.reftitrearchive.services.TitreArchiveServices
+			</value>
+		</property>
+	</bean>
+	
+	
+
+	<bean id="titreRecentServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.reftitrerecent.services.TitreRecentServices
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="titreServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.reftitre.services.TitreServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="titreServicesWithCacheSupport" class="com.bnppa.referentiels.services.titres.TitresServicesWithCacheSupport">
+		<property name="delegateServices" ref="titreRecentServices"/>
+	</bean>
+
+	<bean id="portfolioServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refportfolio.services.PortFolioServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="portfolioAccountServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refportfolioaccount.services.PortFolioAccountServices
+			</value>
+		</property>
+	</bean>
+
+	<!-- ** PARTY SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="alternatePartyIdentificationServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refalternatepartyidenfication.services.AlternatePartyIdentificationServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="partyServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refparty.services.PartyServices
+			</value>
+		</property>
+	</bean>
+	
+	<!-- ** PlaceOfListingDescription ************************************** -->
+	<!-- ********************************************************* -->
+	
+	<bean id="placeOfListingDescriptionServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refplaceoflistingdescription.services.PlaceOfListingDescriptionServices
+			</value>
+		</property>
+	</bean>
+
+	<!-- ** CIRCUIT CENTRALISATION SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="circuitCentralisationServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refcircuitcentralisation.services.CircuitCentralisationServices
+			</value>
+		</property>
+	</bean>
+
+	<!-- ** TITRES SERVICES (2) ************************************ -->
+	<!-- ********************************************************* -->
+	<bean id="regleConservationTitreRecentServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refregleconservationtitrerecent.services.RegleConservationTitreRecentServices
+			</value>
+		</property>
+	</bean>
+
+	<!-- ** COURS SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="valeurLiquidativeServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refvaleurliquidative.dernierconnu.services.ValeurLiquidativeDernierConnuServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="valeurLiquidativeHistoriqueServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refvaleurliquidative.historique.services.ValeurLiquidativeHistoriqueServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="tauxChangeDernierConnuServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.reftauxchange.dernierconnu.services.TauxChangeDernierConnuServices
+			</value>
+		</property>
+	</bean>
+
+	<bean id="coursDernierConnuServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refcours.dernierconnu.services.CoursDernierConnuServices
+			</value>
+		</property>
+	</bean>
+
+	<!-- ** OST SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="corporateActionServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>com.bnppa.referentiels.ost.services.CorporateActionServices</value>
+		</property>
+	</bean>
+
+	<!-- ** CURRENCY SERVICES ***************************************** -->
+	<!-- ************************************************************** -->
+	<bean id="currencyServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>com.bnppa.referentiels.refnomenclature.services.CurrencyServices</value>
+		</property>
+	</bean>
+	
+	<bean id="currencyServicesWithCacheSupport" class="com.bnppa.referentiels.services.nomenclature.CurrencyServicesWithCacheSupport">
+		<property name="delegateServices" ref="currencyServices"/>
+	</bean>
+	
+	<!-- ** BAREME SERVICES ************************************** -->
+	<!-- ********************************************************* -->
+	<bean id="baremeServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>com.bnppa.referentiels.refbareme.services.BaremeServices</value>
+		</property>
+	</bean>
+	
+	<!-- ** COURS SERVICES (2) *********************************** -->
+	<!-- ********************************************************* -->
+	<bean id="tauxChangeHistoriqueServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.reftauxchange.historique.services.TauxChangeHistoriqueServices
+			</value>
+		</property>
+	</bean>
+	
+	<bean id="coursHistoriqueServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refcours.historique.services.CoursHistoriqueServices
+			</value>
+		</property>
+	</bean>	
+
+	<bean id="instrumentDetailServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refcours.instrumentdetail.services.InstrumentDetailServices
+			</value>
+		</property>
+	</bean>	
+	
+	<bean id="alternatePortfolioIdentificationServices"
+		class="com.bnppa.referentiels.services.invoker.RemoteServicesProxyFactoryBean">
+		<property name="invokerStatsCollector" ref="statsCollector" />
+		<property name="serviceCallerHttp" ref="RemoteHttpInvoker" />
+		<property name="serviceInterface">
+			<value>
+				com.bnppa.referentiels.refalternateportfolioidentification.services.AlternatePortfolioIdentificationServices
+			</value>
+		</property>
+	</bean>
+
+ 	<bean id="statsCollector" class="com.bnppa.referentiels.services.invoker.InvokerStatsCollector"/>
+
+	<!-- Define the ClientServicesImpl -->
+	<!-- <bean 	id="metierServices" class="com.bnppa.referentiels.services.impl.MetierServicesImpl">	
+		<property name="titreServices">
+			<ref bean="titreServices" />
+		</property>
+		<property name="portfolioServices">
+			<ref bean="portfolioServices" />
+		</property>	
+		<property name="portfolioAccountServices">
+			<ref bean="portfolioAccountServices" />
+		</property>
+		<property name="titreRecentServices">
+			<ref bean="titreRecentServices" />
+		</property>					
+		<property name="alternatePartyIdentificationServices">
+			<ref bean="alternatePartyIdentificationServices" />
+		</property>					
+		<property name="circuitCentralisationServices">
+			<ref bean="circuitCentralisationServices" />
+		</property>
+		<property name="regleConservationTitreRecentServices">
+			<ref bean="regleConservationTitreRecentServices" />
+		</property>
+		<property name="valeurLiquidativeServices">
+			<ref bean="valeurLiquidativeServices" />
+		</property>
+		<property name="valeurLiquidativeHistoriqueServices">
+			<ref bean="valeurLiquidativeHistoriqueServices" />
+		</property>
+		<property name="tauxChangeDernierConnuServices">
+			<ref bean="tauxChangeDernierConnuServices" />
+		</property>
+		<property name="coursDernierConnuServices">
+			<ref bean="coursDernierConnuServices" />
+		</property>
+		<property name="corporateActionServices">
+			<ref bean="corporateActionServices" />
+		</property>
+		<property name="currencyServices">
+			<ref bean="currencyServices" />
+		</property>
+		<property name="partyServices">
+			<ref bean="partyServices" />
+		</property>
+		<property name="tauxChangeHistoriqueServices">
+			<ref bean="tauxChangeHistoriqueServices" />
+		</property>
+		<property name="coursHistoriqueServices">
+			<ref bean="coursHistoriqueServices" />
+		</property>
+		<property name="instrumentDetailServices">
+			<ref bean="instrumentDetailServices" />
+		</property>
+		<property name="alternatePortfolioIdentificationServices">
+			<ref bean="alternatePortfolioIdentificationServices" />
+		</property>
+		
+	</bean>	-->
+
+	<!-- SERVICAL CALL LOGGING FEATURES (non activé)
+	<bean id="ServiceLogAdvice" class="com.bnppa.referentiels.services.aop.ServiceLogAdvice"></bean>
+
+	<bean id="LogAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="ServiceLogAdvice" />
+		</property>
+		<property name="pattern">
+			<value>.*referentiels.services.*</value>
+		</property>
+	</bean>
+
+	<bean id="PerformanceTestInterceptor" 	class="com.bnppa.referentiels.services.aop.PerformanceTestInterceptor">	</bean>
+
+	<bean id="PerformanceTestAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref bean="PerformanceTestInterceptor" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>.*referentiels.services.*</value>
+				<value>.*builder.*</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="autoProxyCreator" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" /> -->
+	
+</beans>
